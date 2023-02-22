@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dlut.managedrone.mapper.DroneFlylogMapper">
+    
+    <resultMap type="DroneFlylog" id="DroneFlylogResult">
+        <result property="id"    column="id"    />
+        <result property="droneNumber"    column="drone_number"    />
+        <result property="inAir"    column="in_air"    />
+        <result property="lat"    column="lat"    />
+        <result property="lng"    column="lng"    />
+        <result property="battery"    column="battery"    />
+        <result property="flightMode"    column="flight_mode"    />
+        <result property="isArmed"    column="is_armed"    />
+        <result property="datetime"    column="datetime"    />
+    </resultMap>
+
+    <sql id="selectDroneFlylogVo">
+        select id, drone_number, in_air, lat, lng, battery, flight_mode, is_armed, datetime from drone_flylog
+    </sql>
+
+    <select id="selectDroneFlylogList" parameterType="DroneFlylog" resultMap="DroneFlylogResult">
+        <include refid="selectDroneFlylogVo"/>
+        <where>  
+            <if test="droneNumber != null  and droneNumber != ''"> and drone_number = #{droneNumber}</if>
+            <if test="inAir != null "> and in_air = #{inAir}</if>
+            <if test="lat != null "> and lat = #{lat}</if>
+            <if test="lng != null "> and lng = #{lng}</if>
+            <if test="battery != null "> and battery = #{battery}</if>
+            <if test="flightMode != null  and flightMode != ''"> and flight_mode = #{flightMode}</if>
+            <if test="isArmed != null "> and is_armed = #{isArmed}</if>
+            <if test="datetime != null "> and datetime = #{datetime}</if>
+        </where>
+    </select>
+    
+    <select id="selectDroneFlylogById" parameterType="String" resultMap="DroneFlylogResult">
+        <include refid="selectDroneFlylogVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertDroneFlylog" parameterType="DroneFlylog">
+        insert into drone_flylog
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="droneNumber != null and droneNumber != ''">drone_number,</if>
+            <if test="inAir != null">in_air,</if>
+            <if test="lat != null">lat,</if>
+            <if test="lng != null">lng,</if>
+            <if test="battery != null">battery,</if>
+            <if test="flightMode != null">flight_mode,</if>
+            <if test="isArmed != null">is_armed,</if>
+            <if test="datetime != null">datetime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="droneNumber != null and droneNumber != ''">#{droneNumber},</if>
+            <if test="inAir != null">#{inAir},</if>
+            <if test="lat != null">#{lat},</if>
+            <if test="lng != null">#{lng},</if>
+            <if test="battery != null">#{battery},</if>
+            <if test="flightMode != null">#{flightMode},</if>
+            <if test="isArmed != null">#{isArmed},</if>
+            <if test="datetime != null">#{datetime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDroneFlylog" parameterType="DroneFlylog">
+        update drone_flylog
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="droneNumber != null and droneNumber != ''">drone_number = #{droneNumber},</if>
+            <if test="inAir != null">in_air = #{inAir},</if>
+            <if test="lat != null">lat = #{lat},</if>
+            <if test="lng != null">lng = #{lng},</if>
+            <if test="battery != null">battery = #{battery},</if>
+            <if test="flightMode != null">flight_mode = #{flightMode},</if>
+            <if test="isArmed != null">is_armed = #{isArmed},</if>
+            <if test="datetime != null">datetime = #{datetime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDroneFlylogById" parameterType="String">
+        delete from drone_flylog where id = #{id}
+    </delete>
+
+    <delete id="deleteDroneFlylogByIds" parameterType="String">
+        delete from drone_flylog where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,2 @@
+org.dlut.common.log.service.AsyncLogService
+org.dlut.common.log.aspect.LogAspect

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dlut.system.mapper.SysNoticeTypeMapper">
+    
+    <resultMap type="SysNoticeType" id="SysNoticeTypeResult">
+        <result property="noticeType"    column="notice_type"    />
+        <result property="noticeName"    column="notice_name"    />
+        <result property="createdBy"    column="created_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectSysNoticeTypeVo">
+        select notice_type, notice_name, created_by, create_time, remark from sys_notice_type
+    </sql>
+
+    <select id="selectSysNoticeTypeList" parameterType="SysNoticeType" resultMap="SysNoticeTypeResult">
+        <include refid="selectSysNoticeTypeVo"/>
+        <where>  
+            <if test="noticeType != null "> and notice_type = #{noticeType}</if>
+            <if test="noticeName != null  and noticeName != ''"> and notice_name like concat('%', #{noticeName}, '%')</if>
+            <if test="createdBy != null  and createdBy != ''"> and created_by = #{createdBy}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysNoticeTypeByNoticeType" parameterType="Long" resultMap="SysNoticeTypeResult">
+        <include refid="selectSysNoticeTypeVo"/>
+        where notice_type = #{noticeType}
+    </select>
+        
+    <insert id="insertSysNoticeType" parameterType="SysNoticeType">
+        insert into sys_notice_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="noticeType != null">notice_type,</if>
+            <if test="noticeName != null and noticeName != ''">notice_name,</if>
+            <if test="createdBy != null">created_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="noticeType != null">#{noticeType},</if>
+            <if test="noticeName != null and noticeName != ''">#{noticeName},</if>
+            <if test="createdBy != null">#{createdBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysNoticeType" parameterType="SysNoticeType">
+        update sys_notice_type
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="noticeName != null and noticeName != ''">notice_name = #{noticeName},</if>
+            <if test="createdBy != null">created_by = #{createdBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where notice_type = #{noticeType}
+    </update>
+
+    <delete id="deleteSysNoticeTypeByNoticeType" parameterType="Long">
+        delete from sys_notice_type where notice_type = #{noticeType}
+    </delete>
+
+    <delete id="deleteSysNoticeTypeByNoticeTypes" parameterType="String">
+        delete from sys_notice_type where notice_type in 
+        <foreach item="noticeType" collection="array" open="(" separator="," close=")">
+            #{noticeType}
+        </foreach>
+    </delete>
+<!--    查询表中最后一个表-->
+    <select id="selectLastSysNoticeType" resultMap="SysNoticeTypeResult">
+        <include refid="selectSysNoticeTypeVo"/>
+        order by notice_type desc limit 1
+    </select>
+</mapper>

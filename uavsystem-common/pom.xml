@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.dlut.uavsystem</groupId>
+        <artifactId>uavsystem</artifactId>
+        <version>3.6.2</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <modules>
+        <module>uavsystem-common-log</module>
+        <module>uavsystem-common-core</module>
+        <module>uavsystem-common-redis</module>
+        <module>uavsystem-common-seata</module>
+        <module>uavsystem-common-swagger</module>
+        <module>uavsystem-common-security</module>
+        <module>uavsystem-common-datascope</module>
+        <module>uavsystem-common-datasource</module>
+    </modules>
+
+    <artifactId>uavsystem-common</artifactId>
+    <packaging>pom</packaging>
+
+    <description>
+        uavsystem-common通用模块
+    </description>
+
+</project>

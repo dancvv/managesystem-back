@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dlut.managedrone.mapper.DroneInfoMapper">
+    
+    <resultMap type="DroneInfo" id="DroneInfoResult">
+        <result property="id"    column="id"    />
+        <result property="droneNumer"    column="drone_numer"    />
+        <result property="droneType"    column="drone_type"    />
+        <result property="droneWheelbase"    column="drone_wheelbase"    />
+        <result property="takeoffWeight"    column="takeoff_weight"    />
+        <result property="missionWeight"    column="mission_weight"    />
+        <result property="flySpeed"    column="fly_speed"    />
+        <result property="flyHeight"    column="fly_height"    />
+        <result property="droneStatus"    column="drone_status"    />
+        <result property="droneBattery"    column="drone_battery"    />
+        <result property="droneEndurance"    column="drone_endurance"    />
+        <result property="droneManuf"    column="drone_manuf"    />
+    </resultMap>
+
+    <sql id="selectDroneInfoVo">
+        select id, drone_numer, drone_type, drone_wheelbase, takeoff_weight, mission_weight, fly_speed, fly_height, drone_status, drone_battery, drone_endurance, drone_manuf from drone_info
+    </sql>
+
+    <select id="selectDroneInfoList" parameterType="DroneInfo" resultMap="DroneInfoResult">
+        <include refid="selectDroneInfoVo"/>
+        <where>  
+            <if test="droneNumer != null  and droneNumer != ''"> and drone_numer = #{droneNumer}</if>
+            <if test="droneType != null  and droneType != ''"> and drone_type = #{droneType}</if>
+            <if test="droneWheelbase != null  and droneWheelbase != ''"> and drone_wheelbase = #{droneWheelbase}</if>
+            <if test="takeoffWeight != null "> and takeoff_weight = #{takeoffWeight}</if>
+            <if test="missionWeight != null "> and mission_weight = #{missionWeight}</if>
+            <if test="flySpeed != null "> and fly_speed = #{flySpeed}</if>
+            <if test="flyHeight != null "> and fly_height = #{flyHeight}</if>
+            <if test="droneStatus != null "> and drone_status = #{droneStatus}</if>
+            <if test="droneBattery != null "> and drone_battery = #{droneBattery}</if>
+            <if test="droneEndurance != null "> and drone_endurance = #{droneEndurance}</if>
+            <if test="droneManuf != null  and droneManuf != ''"> and drone_manuf = #{droneManuf}</if>
+        </where>
+    </select>
+    
+    <select id="selectDroneInfoById" parameterType="String" resultMap="DroneInfoResult">
+        <include refid="selectDroneInfoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertDroneInfo" parameterType="DroneInfo">
+        insert into drone_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="droneNumer != null and droneNumer != ''">drone_numer,</if>
+            <if test="droneType != null">drone_type,</if>
+            <if test="droneWheelbase != null">drone_wheelbase,</if>
+            <if test="takeoffWeight != null">takeoff_weight,</if>
+            <if test="missionWeight != null">mission_weight,</if>
+            <if test="flySpeed != null">fly_speed,</if>
+            <if test="flyHeight != null">fly_height,</if>
+            <if test="droneStatus != null">drone_status,</if>
+            <if test="droneBattery != null">drone_battery,</if>
+            <if test="droneEndurance != null">drone_endurance,</if>
+            <if test="droneManuf != null">drone_manuf,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="droneNumer != null and droneNumer != ''">#{droneNumer},</if>
+            <if test="droneType != null">#{droneType},</if>
+            <if test="droneWheelbase != null">#{droneWheelbase},</if>
+            <if test="takeoffWeight != null">#{takeoffWeight},</if>
+            <if test="missionWeight != null">#{missionWeight},</if>
+            <if test="flySpeed != null">#{flySpeed},</if>
+            <if test="flyHeight != null">#{flyHeight},</if>
+            <if test="droneStatus != null">#{droneStatus},</if>
+            <if test="droneBattery != null">#{droneBattery},</if>
+            <if test="droneEndurance != null">#{droneEndurance},</if>
+            <if test="droneManuf != null">#{droneManuf},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDroneInfo" parameterType="DroneInfo">
+        update drone_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="droneNumer != null and droneNumer != ''">drone_numer = #{droneNumer},</if>
+            <if test="droneType != null">drone_type = #{droneType},</if>
+            <if test="droneWheelbase != null">drone_wheelbase = #{droneWheelbase},</if>
+            <if test="takeoffWeight != null">takeoff_weight = #{takeoffWeight},</if>
+            <if test="missionWeight != null">mission_weight = #{missionWeight},</if>
+            <if test="flySpeed != null">fly_speed = #{flySpeed},</if>
+            <if test="flyHeight != null">fly_height = #{flyHeight},</if>
+            <if test="droneStatus != null">drone_status = #{droneStatus},</if>
+            <if test="droneBattery != null">drone_battery = #{droneBattery},</if>
+            <if test="droneEndurance != null">drone_endurance = #{droneEndurance},</if>
+            <if test="droneManuf != null">drone_manuf = #{droneManuf},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDroneInfoById" parameterType="String">
+        delete from drone_info where id = #{id}
+    </delete>
+
+    <delete id="deleteDroneInfoByIds" parameterType="String">
+        delete from drone_info where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

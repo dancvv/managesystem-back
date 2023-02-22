@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dlut.managedrone.mapper.DroneMissionPlanMapper">
+    
+    <resultMap type="DroneMissionPlan" id="DroneMissionPlanResult">
+        <result property="id"    column="id"    />
+        <result property="taskNumber"    column="task_number"    />
+        <result property="taskPriority"    column="task_priority"    />
+        <result property="lat"    column="lat"    />
+        <result property="lng"    column="lng"    />
+        <result property="dateTime"    column="date_time"    />
+        <result property="isExecute"    column="is_execute"    />
+    </resultMap>
+
+    <sql id="selectDroneMissionPlanVo">
+        select id, task_number, task_priority, lat, lng, date_time, is_execute from drone_mission_plan
+    </sql>
+
+    <select id="selectDroneMissionPlanList" parameterType="DroneMissionPlan" resultMap="DroneMissionPlanResult">
+        <include refid="selectDroneMissionPlanVo"/>
+        <where>  
+            <if test="taskNumber != null  and taskNumber != ''"> and task_number = #{taskNumber}</if>
+            <if test="taskPriority != null "> and task_priority = #{taskPriority}</if>
+            <if test="lat != null "> and lat = #{lat}</if>
+            <if test="lng != null "> and lng = #{lng}</if>
+            <if test="dateTime != null "> and date_time = #{dateTime}</if>
+            <if test="isExecute != null "> and is_execute = #{isExecute}</if>
+        </where>
+    </select>
+    
+    <select id="selectDroneMissionPlanById" parameterType="String" resultMap="DroneMissionPlanResult">
+        <include refid="selectDroneMissionPlanVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertDroneMissionPlan" parameterType="DroneMissionPlan">
+        insert into drone_mission_plan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="taskNumber != null and taskNumber != ''">task_number,</if>
+            <if test="taskPriority != null">task_priority,</if>
+            <if test="lat != null">lat,</if>
+            <if test="lng != null">lng,</if>
+            <if test="dateTime != null">date_time,</if>
+            <if test="isExecute != null">is_execute,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="taskNumber != null and taskNumber != ''">#{taskNumber},</if>
+            <if test="taskPriority != null">#{taskPriority},</if>
+            <if test="lat != null">#{lat},</if>
+            <if test="lng != null">#{lng},</if>
+            <if test="dateTime != null">#{dateTime},</if>
+            <if test="isExecute != null">#{isExecute},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDroneMissionPlan" parameterType="DroneMissionPlan">
+        update drone_mission_plan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="taskNumber != null and taskNumber != ''">task_number = #{taskNumber},</if>
+            <if test="taskPriority != null">task_priority = #{taskPriority},</if>
+            <if test="lat != null">lat = #{lat},</if>
+            <if test="lng != null">lng = #{lng},</if>
+            <if test="dateTime != null">date_time = #{dateTime},</if>
+            <if test="isExecute != null">is_execute = #{isExecute},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDroneMissionPlanById" parameterType="String">
+        delete from drone_mission_plan where id = #{id}
+    </delete>
+
+    <delete id="deleteDroneMissionPlanByIds" parameterType="String">
+        delete from drone_mission_plan where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

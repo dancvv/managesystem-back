@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dlut.managedrone.mapper.DroneMissionAssignmentMapper">
+    
+    <resultMap type="DroneMissionAssignment" id="DroneMissionAssignmentResult">
+        <result property="id"    column="id"    />
+        <result property="taskNumber"    column="task_number"    />
+        <result property="assignmentDrone"    column="assignment_drone"    />
+        <result property="realtimePriority"    column="realtime_priority"    />
+        <result property="dateTime"    column="date_time"    />
+    </resultMap>
+
+    <sql id="selectDroneMissionAssignmentVo">
+        select id, task_number, assignment_drone, realtime_priority, date_time from drone_mission_assignment
+    </sql>
+
+    <select id="selectDroneMissionAssignmentList" parameterType="DroneMissionAssignment" resultMap="DroneMissionAssignmentResult">
+        <include refid="selectDroneMissionAssignmentVo"/>
+        <where>  
+            <if test="taskNumber != null  and taskNumber != ''"> and task_number = #{taskNumber}</if>
+            <if test="assignmentDrone != null  and assignmentDrone != ''"> and assignment_drone = #{assignmentDrone}</if>
+            <if test="realtimePriority != null "> and realtime_priority = #{realtimePriority}</if>
+            <if test="dateTime != null "> and date_time = #{dateTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectDroneMissionAssignmentById" parameterType="String" resultMap="DroneMissionAssignmentResult">
+        <include refid="selectDroneMissionAssignmentVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertDroneMissionAssignment" parameterType="DroneMissionAssignment">
+        insert into drone_mission_assignment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="taskNumber != null">task_number,</if>
+            <if test="assignmentDrone != null">assignment_drone,</if>
+            <if test="realtimePriority != null">realtime_priority,</if>
+            <if test="dateTime != null">date_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="taskNumber != null">#{taskNumber},</if>
+            <if test="assignmentDrone != null">#{assignmentDrone},</if>
+            <if test="realtimePriority != null">#{realtimePriority},</if>
+            <if test="dateTime != null">#{dateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDroneMissionAssignment" parameterType="DroneMissionAssignment">
+        update drone_mission_assignment
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="taskNumber != null">task_number = #{taskNumber},</if>
+            <if test="assignmentDrone != null">assignment_drone = #{assignmentDrone},</if>
+            <if test="realtimePriority != null">realtime_priority = #{realtimePriority},</if>
+            <if test="dateTime != null">date_time = #{dateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDroneMissionAssignmentById" parameterType="String">
+        delete from drone_mission_assignment where id = #{id}
+    </delete>
+
+    <delete id="deleteDroneMissionAssignmentByIds" parameterType="String">
+        delete from drone_mission_assignment where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

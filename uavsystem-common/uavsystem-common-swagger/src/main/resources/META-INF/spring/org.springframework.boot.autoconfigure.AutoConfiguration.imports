@@ -1,0 +1,3 @@
+org.dlut.common.swagger.config.SwaggerAutoConfiguration
+org.dlut.common.swagger.config.SwaggerWebConfiguration
+org.dlut.common.swagger.config.SwaggerBeanPostProcessor
