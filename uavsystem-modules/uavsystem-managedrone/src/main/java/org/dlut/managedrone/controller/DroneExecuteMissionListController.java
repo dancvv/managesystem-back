@@ -1,6 +1,7 @@
 package org.dlut.managedrone.controller;
 
 import java.util.List;
+import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +24,9 @@ import org.dlut.common.core.web.page.TableDataInfo;
 
 /**
  * 任务执行列表Controller
- * 
+ *
  * @author wang
- * @date 2023-02-19
+ * @date 2023-02-23
  */
 @RestController
 @RequestMapping("/list")
@@ -96,7 +97,7 @@ public class DroneExecuteMissionListController extends BaseController
      */
     @RequiresPermissions("drone_system:list:remove")
     @Log(title = "任务执行列表", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
+    @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable String[] ids)
     {
         return toAjax(droneExecuteMissionListService.deleteDroneExecuteMissionListByIds(ids));

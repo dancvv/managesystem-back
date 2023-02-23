@@ -9,9 +9,9 @@ import org.dlut.common.core.web.domain.BaseEntity;
 
 /**
  * 任务执行列表对象 drone_execute_mission_list
- * 
+ *
  * @author wang
- * @date 2023-02-19
+ * @date 2023-02-23
  */
 public class DroneExecuteMissionList extends BaseEntity
 {
@@ -28,57 +28,70 @@ public class DroneExecuteMissionList extends BaseEntity
     @Excel(name = "任务执行编号")
     private String droneExecuteNumber;
 
-    /** 路线列表 */
-    @Excel(name = "路线列表")
-    private String missionList;
+    /** 任务顺序 */
+    @Excel(name = "任务顺序")
+    private String numberInlist;
+
+    /** 是否执行 */
+    @Excel(name = "是否执行")
+    private Integer isExecute;
 
     /** 时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date dateTime;
 
-    public void setId(String id) 
+    public void setId(String id)
     {
         this.id = id;
     }
 
-    public String getId() 
+    public String getId()
     {
         return id;
     }
-    public void setAssignmentDrone(String assignmentDrone) 
+    public void setAssignmentDrone(String assignmentDrone)
     {
         this.assignmentDrone = assignmentDrone;
     }
 
-    public String getAssignmentDrone() 
+    public String getAssignmentDrone()
     {
         return assignmentDrone;
     }
-    public void setDroneExecuteNumber(String droneExecuteNumber) 
+    public void setDroneExecuteNumber(String droneExecuteNumber)
     {
         this.droneExecuteNumber = droneExecuteNumber;
     }
 
-    public String getDroneExecuteNumber() 
+    public String getDroneExecuteNumber()
     {
         return droneExecuteNumber;
     }
-    public void setMissionList(String missionList) 
+    public void setNumberInlist(String numberInlist)
     {
-        this.missionList = missionList;
+        this.numberInlist = numberInlist;
     }
 
-    public String getMissionList() 
+    public String getNumberInlist()
     {
-        return missionList;
+        return numberInlist;
     }
-    public void setDateTime(Date dateTime) 
+    public void setIsExecute(Integer isExecute)
+    {
+        this.isExecute = isExecute;
+    }
+
+    public Integer getIsExecute()
+    {
+        return isExecute;
+    }
+    public void setDateTime(Date dateTime)
     {
         this.dateTime = dateTime;
     }
 
-    public Date getDateTime() 
+    public Date getDateTime()
     {
         return dateTime;
     }
@@ -86,11 +99,12 @@ public class DroneExecuteMissionList extends BaseEntity
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("assignmentDrone", getAssignmentDrone())
-            .append("droneExecuteNumber", getDroneExecuteNumber())
-            .append("missionList", getMissionList())
-            .append("dateTime", getDateTime())
-            .toString();
+                .append("id", getId())
+                .append("assignmentDrone", getAssignmentDrone())
+                .append("droneExecuteNumber", getDroneExecuteNumber())
+                .append("numberInlist", getNumberInlist())
+                .append("isExecute", getIsExecute())
+                .append("dateTime", getDateTime())
+                .toString();
     }
 }

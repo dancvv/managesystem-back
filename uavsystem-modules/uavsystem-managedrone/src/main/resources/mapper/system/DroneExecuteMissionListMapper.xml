@@ -1,52 +1,56 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.dlut.managedrone.mapper.DroneExecuteMissionListMapper">
-    
+
     <resultMap type="DroneExecuteMissionList" id="DroneExecuteMissionListResult">
         <result property="id"    column="id"    />
         <result property="assignmentDrone"    column="assignment_drone"    />
         <result property="droneExecuteNumber"    column="drone_execute_number"    />
-        <result property="missionList"    column="mission_list"    />
+        <result property="numberInlist"    column="number_inlist"    />
+        <result property="isExecute"    column="is_execute"    />
         <result property="dateTime"    column="date_time"    />
     </resultMap>
 
     <sql id="selectDroneExecuteMissionListVo">
-        select id, assignment_drone, drone_execute_number, mission_list, date_time from drone_execute_mission_list
+        select id, assignment_drone, drone_execute_number, number_inlist, is_execute, date_time from drone_execute_mission_list
     </sql>
 
     <select id="selectDroneExecuteMissionListList" parameterType="DroneExecuteMissionList" resultMap="DroneExecuteMissionListResult">
         <include refid="selectDroneExecuteMissionListVo"/>
-        <where>  
+        <where>
             <if test="assignmentDrone != null  and assignmentDrone != ''"> and assignment_drone = #{assignmentDrone}</if>
             <if test="droneExecuteNumber != null  and droneExecuteNumber != ''"> and drone_execute_number = #{droneExecuteNumber}</if>
-            <if test="missionList != null  and missionList != ''"> and mission_list = #{missionList}</if>
+            <if test="numberInlist != null  and numberInlist != ''"> and number_inlist = #{numberInlist}</if>
+            <if test="isExecute != null "> and is_execute = #{isExecute}</if>
             <if test="dateTime != null "> and date_time = #{dateTime}</if>
         </where>
     </select>
-    
+
     <select id="selectDroneExecuteMissionListById" parameterType="String" resultMap="DroneExecuteMissionListResult">
         <include refid="selectDroneExecuteMissionListVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertDroneExecuteMissionList" parameterType="DroneExecuteMissionList">
         insert into drone_execute_mission_list
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">id,</if>
             <if test="assignmentDrone != null and assignmentDrone != ''">assignment_drone,</if>
             <if test="droneExecuteNumber != null">drone_execute_number,</if>
-            <if test="missionList != null">mission_list,</if>
+            <if test="numberInlist != null">number_inlist,</if>
+            <if test="isExecute != null">is_execute,</if>
             <if test="dateTime != null">date_time,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
             <if test="assignmentDrone != null and assignmentDrone != ''">#{assignmentDrone},</if>
             <if test="droneExecuteNumber != null">#{droneExecuteNumber},</if>
-            <if test="missionList != null">#{missionList},</if>
+            <if test="numberInlist != null">#{numberInlist},</if>
+            <if test="isExecute != null">#{isExecute},</if>
             <if test="dateTime != null">#{dateTime},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateDroneExecuteMissionList" parameterType="DroneExecuteMissionList">
@@ -54,7 +58,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             <if test="assignmentDrone != null and assignmentDrone != ''">assignment_drone = #{assignmentDrone},</if>
             <if test="droneExecuteNumber != null">drone_execute_number = #{droneExecuteNumber},</if>
-            <if test="missionList != null">mission_list = #{missionList},</if>
+            <if test="numberInlist != null">number_inlist = #{numberInlist},</if>
+            <if test="isExecute != null">is_execute = #{isExecute},</if>
             <if test="dateTime != null">date_time = #{dateTime},</if>
         </trim>
         where id = #{id}
@@ -65,7 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteDroneExecuteMissionListByIds" parameterType="String">
-        delete from drone_execute_mission_list where id in 
+        delete from drone_execute_mission_list where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
