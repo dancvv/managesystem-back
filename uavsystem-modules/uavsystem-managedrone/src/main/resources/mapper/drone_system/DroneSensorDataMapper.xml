@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dlut.managedrone.mapper.DroneSensorDataMapper">
+    
+    <resultMap type="DroneSensorData" id="DroneSensorDataResult">
+        <result property="dataId"    column="data_id"    />
+        <result property="sensorId"    column="sensor_id"    />
+        <result property="dataType"    column="data_type"    />
+        <result property="dataValue"    column="data_value"    />
+        <result property="recordTime"    column="record_time"    />
+    </resultMap>
+
+    <sql id="selectDroneSensorDataVo">
+        select data_id, sensor_id, data_type, data_value, record_time from drone_sensor_data
+    </sql>
+
+    <select id="selectDroneSensorDataList" parameterType="DroneSensorData" resultMap="DroneSensorDataResult">
+        <include refid="selectDroneSensorDataVo"/>
+        <where>  
+            <if test="sensorId != null "> and sensor_id = #{sensorId}</if>
+            <if test="dataType != null  and dataType != ''"> and data_type = #{dataType}</if>
+            <if test="dataValue != null  and dataValue != ''"> and data_value = #{dataValue}</if>
+            <if test="recordTime != null "> and record_time = #{recordTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectDroneSensorDataByDataId" parameterType="Long" resultMap="DroneSensorDataResult">
+        <include refid="selectDroneSensorDataVo"/>
+        where data_id = #{dataId}
+    </select>
+        
+    <insert id="insertDroneSensorData" parameterType="DroneSensorData" useGeneratedKeys="true" keyProperty="dataId">
+        insert into drone_sensor_data
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sensorId != null">sensor_id,</if>
+            <if test="dataType != null">data_type,</if>
+            <if test="dataValue != null">data_value,</if>
+            <if test="recordTime != null">record_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sensorId != null">#{sensorId},</if>
+            <if test="dataType != null">#{dataType},</if>
+            <if test="dataValue != null">#{dataValue},</if>
+            <if test="recordTime != null">#{recordTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDroneSensorData" parameterType="DroneSensorData">
+        update drone_sensor_data
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sensorId != null">sensor_id = #{sensorId},</if>
+            <if test="dataType != null">data_type = #{dataType},</if>
+            <if test="dataValue != null">data_value = #{dataValue},</if>
+            <if test="recordTime != null">record_time = #{recordTime},</if>
+        </trim>
+        where data_id = #{dataId}
+    </update>
+
+    <delete id="deleteDroneSensorDataByDataId" parameterType="Long">
+        delete from drone_sensor_data where data_id = #{dataId}
+    </delete>
+
+    <delete id="deleteDroneSensorDataByDataIds" parameterType="String">
+        delete from drone_sensor_data where data_id in 
+        <foreach item="dataId" collection="array" open="(" separator="," close=")">
+            #{dataId}
+        </foreach>
+    </delete>
+</mapper>

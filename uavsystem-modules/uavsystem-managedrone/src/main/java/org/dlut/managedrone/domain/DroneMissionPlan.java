@@ -10,9 +10,9 @@ import org.dlut.common.core.web.domain.BaseEntity;
 
 /**
  * 任务管理对象 drone_mission_plan
- * 
+ *
  * @author wang
- * @date 2023-02-19
+ * @date 2023-02-27
  */
 public class DroneMissionPlan extends BaseEntity
 {
@@ -37,6 +37,10 @@ public class DroneMissionPlan extends BaseEntity
     @Excel(name = "纬度")
     private BigDecimal lng;
 
+    /** 任务耗能 */
+    @Excel(name = "任务耗能")
+    private Long energyRequirement;
+
     /** 时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "时间", width = 30, dateFormat = "yyyy-MM-dd")
@@ -46,66 +50,75 @@ public class DroneMissionPlan extends BaseEntity
     @Excel(name = "任务是否执行")
     private Integer isExecute;
 
-    public void setId(String id) 
+    public void setId(String id)
     {
         this.id = id;
     }
 
-    public String getId() 
+    public String getId()
     {
         return id;
     }
-    public void setTaskNumber(String taskNumber) 
+    public void setTaskNumber(String taskNumber)
     {
         this.taskNumber = taskNumber;
     }
 
-    public String getTaskNumber() 
+    public String getTaskNumber()
     {
         return taskNumber;
     }
-    public void setTaskPriority(Long taskPriority) 
+    public void setTaskPriority(Long taskPriority)
     {
         this.taskPriority = taskPriority;
     }
 
-    public Long getTaskPriority() 
+    public Long getTaskPriority()
     {
         return taskPriority;
     }
-    public void setLat(BigDecimal lat) 
+    public void setLat(BigDecimal lat)
     {
         this.lat = lat;
     }
 
-    public BigDecimal getLat() 
+    public BigDecimal getLat()
     {
         return lat;
     }
-    public void setLng(BigDecimal lng) 
+    public void setLng(BigDecimal lng)
     {
         this.lng = lng;
     }
 
-    public BigDecimal getLng() 
+    public BigDecimal getLng()
     {
         return lng;
     }
-    public void setDateTime(Date dateTime) 
+    public void setEnergyRequirement(Long energyRequirement)
+    {
+        this.energyRequirement = energyRequirement;
+    }
+
+    public Long getEnergyRequirement()
+    {
+        return energyRequirement;
+    }
+    public void setDateTime(Date dateTime)
     {
         this.dateTime = dateTime;
     }
 
-    public Date getDateTime() 
+    public Date getDateTime()
     {
         return dateTime;
     }
-    public void setIsExecute(Integer isExecute) 
+    public void setIsExecute(Integer isExecute)
     {
         this.isExecute = isExecute;
     }
 
-    public Integer getIsExecute() 
+    public Integer getIsExecute()
     {
         return isExecute;
     }
@@ -113,13 +126,14 @@ public class DroneMissionPlan extends BaseEntity
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("taskNumber", getTaskNumber())
-            .append("taskPriority", getTaskPriority())
-            .append("lat", getLat())
-            .append("lng", getLng())
-            .append("dateTime", getDateTime())
-            .append("isExecute", getIsExecute())
-            .toString();
+                .append("id", getId())
+                .append("taskNumber", getTaskNumber())
+                .append("taskPriority", getTaskPriority())
+                .append("lat", getLat())
+                .append("lng", getLng())
+                .append("energyRequirement", getEnergyRequirement())
+                .append("dateTime", getDateTime())
+                .append("isExecute", getIsExecute())
+                .toString();
     }
 }

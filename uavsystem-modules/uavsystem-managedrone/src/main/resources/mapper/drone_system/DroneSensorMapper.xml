@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dlut.managedrone.mapper.DroneSensorMapper">
+    
+    <resultMap type="DroneSensor" id="DroneSensorResult">
+        <result property="sensorId"    column="sensor_id"    />
+        <result property="sensorType"    column="sensor_type"    />
+        <result property="sensorParam"    column="sensor_param"    />
+    </resultMap>
+
+    <sql id="selectDroneSensorVo">
+        select sensor_id, sensor_type, sensor_param from drone_sensor
+    </sql>
+
+    <select id="selectDroneSensorList" parameterType="DroneSensor" resultMap="DroneSensorResult">
+        <include refid="selectDroneSensorVo"/>
+        <where>  
+            <if test="sensorType != null  and sensorType != ''"> and sensor_type = #{sensorType}</if>
+            <if test="sensorParam != null  and sensorParam != ''"> and sensor_param = #{sensorParam}</if>
+        </where>
+    </select>
+    
+    <select id="selectDroneSensorBySensorId" parameterType="Long" resultMap="DroneSensorResult">
+        <include refid="selectDroneSensorVo"/>
+        where sensor_id = #{sensorId}
+    </select>
+        
+    <insert id="insertDroneSensor" parameterType="DroneSensor" useGeneratedKeys="true" keyProperty="sensorId">
+        insert into drone_sensor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sensorType != null">sensor_type,</if>
+            <if test="sensorParam != null">sensor_param,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sensorType != null">#{sensorType},</if>
+            <if test="sensorParam != null">#{sensorParam},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDroneSensor" parameterType="DroneSensor">
+        update drone_sensor
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sensorType != null">sensor_type = #{sensorType},</if>
+            <if test="sensorParam != null">sensor_param = #{sensorParam},</if>
+        </trim>
+        where sensor_id = #{sensorId}
+    </update>
+
+    <delete id="deleteDroneSensorBySensorId" parameterType="Long">
+        delete from drone_sensor where sensor_id = #{sensorId}
+    </delete>
+
+    <delete id="deleteDroneSensorBySensorIds" parameterType="String">
+        delete from drone_sensor where sensor_id in 
+        <foreach item="sensorId" collection="array" open="(" separator="," close=")">
+            #{sensorId}
+        </foreach>
+    </delete>
+</mapper>
