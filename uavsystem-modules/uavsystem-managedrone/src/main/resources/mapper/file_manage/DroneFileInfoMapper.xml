@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dlut.managedrone.mapper.DroneFileInfoMapper">
+    
+    <resultMap type="DroneFileInfo" id="DroneFileInfoResult">
+        <result property="fileId"    column="file_id"    />
+        <result property="fileName"    column="file_name"    />
+        <result property="filePath"    column="file_path"    />
+        <result property="uploadTime"    column="upload_time"    />
+    </resultMap>
+
+    <sql id="selectDroneFileInfoVo">
+        select file_id, file_name, file_path, upload_time from drone_file_info
+    </sql>
+
+    <select id="selectDroneFileInfoList" parameterType="DroneFileInfo" resultMap="DroneFileInfoResult">
+        <include refid="selectDroneFileInfoVo"/>
+        <where>  
+            <if test="fileName != null  and fileName != ''"> and file_name like concat('%', #{fileName}, '%')</if>
+            <if test="filePath != null  and filePath != ''"> and file_path = #{filePath}</if>
+            <if test="uploadTime != null "> and upload_time = #{uploadTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectDroneFileInfoByFileId" parameterType="Long" resultMap="DroneFileInfoResult">
+        <include refid="selectDroneFileInfoVo"/>
+        where file_id = #{fileId}
+    </select>
+        
+    <insert id="insertDroneFileInfo" parameterType="DroneFileInfo" useGeneratedKeys="true" keyProperty="fileId">
+        insert into drone_file_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fileName != null">file_name,</if>
+            <if test="filePath != null">file_path,</if>
+            <if test="uploadTime != null">upload_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fileName != null">#{fileName},</if>
+            <if test="filePath != null">#{filePath},</if>
+            <if test="uploadTime != null">#{uploadTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDroneFileInfo" parameterType="DroneFileInfo">
+        update drone_file_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fileName != null">file_name = #{fileName},</if>
+            <if test="filePath != null">file_path = #{filePath},</if>
+            <if test="uploadTime != null">upload_time = #{uploadTime},</if>
+        </trim>
+        where file_id = #{fileId}
+    </update>
+
+    <delete id="deleteDroneFileInfoByFileId" parameterType="Long">
+        delete from drone_file_info where file_id = #{fileId}
+    </delete>
+
+    <delete id="deleteDroneFileInfoByFileIds" parameterType="String">
+        delete from drone_file_info where file_id in 
+        <foreach item="fileId" collection="array" open="(" separator="," close=")">
+            #{fileId}
+        </foreach>
+    </delete>
+</mapper>
