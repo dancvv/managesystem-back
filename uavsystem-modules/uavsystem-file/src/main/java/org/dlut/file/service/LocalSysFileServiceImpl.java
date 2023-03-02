@@ -10,7 +10,6 @@ import org.dlut.file.utils.FileUploadUtils;
  * 本地文件存储
  *
  */
-@Primary
 @Service
 public class LocalSysFileServiceImpl implements ISysFileService
 {
@@ -45,5 +44,10 @@ public class LocalSysFileServiceImpl implements ISysFileService
         String name = FileUploadUtils.upload(localFilePath, file);
         String url = domain + localFilePrefix + name;
         return url;
+    }
+
+    @Override
+    public void deleteFile(String filePath) {
+
     }
 }

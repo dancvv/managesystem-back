@@ -41,4 +41,9 @@ public class MinioSysFileServiceImpl implements ISysFileService
         client.putObject(args);
         return minioConfig.getUrl() + "/" + minioConfig.getBucketName() + "/" + fileName;
     }
+
+    @Override
+    public void deleteFile(String filePath) {
+
+    }
 }

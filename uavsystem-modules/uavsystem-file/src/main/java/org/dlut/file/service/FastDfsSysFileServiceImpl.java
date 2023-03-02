@@ -1,7 +1,9 @@
 package org.dlut.file.service;
 
+import com.github.tobato.fastdfs.domain.fdfs.FileInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
@@ -12,6 +14,7 @@ import org.dlut.common.core.utils.file.FileTypeUtils;
  * FastDFS 文件存储
  *
  */
+@Primary
 @Service
 public class FastDfsSysFileServiceImpl implements ISysFileService
 {
@@ -36,6 +39,14 @@ public class FastDfsSysFileServiceImpl implements ISysFileService
     {
         StorePath storePath = storageClient.uploadFile(file.getInputStream(), file.getSize(),
                 FileTypeUtils.getExtension(file), null);
-        return domain + "/" + storePath.getFullPath();
+        return domain + ":8888" + "/" + storePath.getFullPath();
+    }
+
+    @Override
+    public void deleteFile(String filePath) {
+        StorePath storePath = StorePath.parseFromUrl(filePath);
+        String group = storePath.getGroup();
+        String path = storePath.getPath();
+        storageClient.deleteFile(group, path);
     }
 }

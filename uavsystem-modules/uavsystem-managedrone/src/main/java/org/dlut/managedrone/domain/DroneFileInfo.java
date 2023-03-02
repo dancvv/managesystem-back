@@ -29,8 +29,8 @@ public class DroneFileInfo extends BaseEntity
     private String filePath;
 
     /** 上传时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "上传时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "上传时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date uploadTime;
 
     public void setFileId(Long fileId) 

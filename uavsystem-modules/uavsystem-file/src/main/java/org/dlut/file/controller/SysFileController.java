@@ -1,12 +1,9 @@
 package org.dlut.file.controller;
 
-import org.dlut.common.core.web.domain.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.dlut.common.core.domain.R;
 import org.dlut.common.core.utils.file.FileUtils;
@@ -43,6 +40,21 @@ public class SysFileController
         catch (Exception e)
         {
             log.error("上传文件失败", e);
+            return R.fail(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("delete")
+    public R<SysFile> delete(@RequestParam String filePath){
+        try{
+//            删除的地址
+            sysFileService.deleteFile(filePath);
+            SysFile sysFile = new SysFile();
+            sysFile.setName(FileUtils.getName(filePath));
+            sysFile.setUrl(filePath);
+            return R.ok(sysFile);
+        }catch (Exception e){
+            log.error("删除文件失败", e);
             return R.fail(e.getMessage());
         }
     }

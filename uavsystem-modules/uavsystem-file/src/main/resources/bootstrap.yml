@@ -20,6 +20,6 @@ spring:
         server-addr: 210.30.97.238:8858
         # 配置文件格式
         file-extension: yml
-        # 共享配置
+        # 共享配置，环境名application-dev.yml
         shared-configs:
           - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
