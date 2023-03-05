@@ -70,7 +70,7 @@
             <artifactId>kaptcha</artifactId>
         </dependency>
 
-        <!-- RuoYi Common Redis-->
+        <!-- UAVSystem Common Redis-->
         <dependency>
             <groupId>org.dlut.uavsystem</groupId>
             <artifactId>uavsystem-common-redis</artifactId>

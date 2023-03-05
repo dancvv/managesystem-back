@@ -17,7 +17,7 @@
 
     <dependencies>
 		
-        <!-- RuoYi Common Core-->
+        <!-- UAVSystem Common Core-->
         <dependency>
             <groupId>org.dlut.uavsystem</groupId>
             <artifactId>uavsystem-common-core</artifactId>

@@ -9,10 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>uavsystem-file</artifactId>
+    <artifactId>uavsystem-timework</artifactId>
 
     <description>
-        uavsystem-modules-file文件服务
+        uavsystem-modules-job定时任务
     </description>
 
     <dependencies>
@@ -41,23 +41,35 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 		
-        <!-- FastDFS -->
+        <!-- Swagger UI -->
         <dependency>
-            <groupId>com.github.tobato</groupId>
-            <artifactId>fastdfs-client</artifactId>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.fox.version}</version>
+        </dependency>
+		
+        <!-- Quartz -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.mchange</groupId>
+                    <artifactId>c3p0</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         
-        <!-- Minio -->
+        <!-- Mysql Connector -->
         <dependency>
-            <groupId>io.minio</groupId>
-            <artifactId>minio</artifactId>
-            <version>${minio.version}</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
         
-        <!-- UAVSystem Api System -->
+        <!-- UAVSystem Common Log -->
         <dependency>
             <groupId>org.dlut.uavsystem</groupId>
-            <artifactId>uavsystem-api-system</artifactId>
+            <artifactId>uavsystem-common-log</artifactId>
         </dependency>
         
         <!-- UAVSystem Common Swagger -->

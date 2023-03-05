@@ -60,13 +60,13 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
         
-        <!-- RuoYi Common Log -->
+        <!-- UAVSystem Common Log -->
         <dependency>
             <groupId>org.dlut.uavsystem</groupId>
             <artifactId>uavsystem-common-log</artifactId>
         </dependency>
         
-        <!-- RuoYi Common Swagger -->
+        <!-- UAVSystem Common Swagger -->
         <dependency>
             <groupId>org.dlut.uavsystem</groupId>
             <artifactId>uavsystem-common-swagger</artifactId>

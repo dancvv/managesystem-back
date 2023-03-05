@@ -11,8 +11,8 @@
     <modules>
         <module>uavsystem-system</module>
         <module>uavsystem-gen</module>
-        <module>uavsystem-job</module>
-        <module>uavsystem-file</module>
+        <module>uavsystem-timework</module>
+        <module>uavsystem-fastdfs</module>
         <module>uavsystem-managedrone</module>
     </modules>
 

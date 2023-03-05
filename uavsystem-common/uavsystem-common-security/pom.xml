@@ -22,13 +22,13 @@
             <artifactId>spring-webmvc</artifactId>
         </dependency>
 
-        <!-- RuoYi Api System -->
+        <!-- UAVSystem Api System -->
         <dependency>
             <groupId>org.dlut.uavsystem</groupId>
             <artifactId>uavsystem-api-system</artifactId>
         </dependency>
 
-        <!-- RuoYi Common Redis-->
+        <!-- UAVSystem Common Redis-->
         <dependency>
             <groupId>org.dlut.uavsystem</groupId>
             <artifactId>uavsystem-common-redis</artifactId>

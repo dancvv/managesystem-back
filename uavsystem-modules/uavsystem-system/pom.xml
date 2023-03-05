@@ -54,25 +54,25 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
         
-        <!-- RuoYi Common DataSource -->
+        <!-- UAVSystem Common DataSource -->
         <dependency>
             <groupId>org.dlut.uavsystem</groupId>
             <artifactId>uavsystem-common-datasource</artifactId>
         </dependency>
         
-        <!-- RuoYi Common DataScope -->
+        <!-- UAVSystem Common DataScope -->
         <dependency>
             <groupId>org.dlut.uavsystem</groupId>
             <artifactId>uavsystem-common-datascope</artifactId>
         </dependency>
         
-        <!-- RuoYi Common Log -->
+        <!-- UAVSystem Common Log -->
         <dependency>
             <groupId>org.dlut.uavsystem</groupId>
             <artifactId>uavsystem-common-log</artifactId>
         </dependency>
         
-        <!-- RuoYi Common Swagger -->
+        <!-- UAVSystem Common Swagger -->
         <dependency>
             <groupId>org.dlut.uavsystem</groupId>
             <artifactId>uavsystem-common-swagger</artifactId>
