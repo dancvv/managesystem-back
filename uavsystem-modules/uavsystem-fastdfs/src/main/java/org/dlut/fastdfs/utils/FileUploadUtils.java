@@ -1,4 +1,4 @@
-package org.dlut.file.utils;
+package org.dlut.fastdfs.utils;
 
 import java.io.File;
 import java.io.IOException;

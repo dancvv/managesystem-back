@@ -1,10 +1,10 @@
-package org.dlut.file.service;
+package org.dlut.fastdfs.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.dlut.file.config.MinioConfig;
-import org.dlut.file.utils.FileUploadUtils;
+import org.dlut.fastdfs.config.MinioConfig;
+import org.dlut.fastdfs.utils.FileUploadUtils;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
 

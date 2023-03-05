@@ -1,4 +1,4 @@
-package org.dlut.file.config;
+package org.dlut.fastdfs.config;
 
 import java.io.File;
 import org.springframework.beans.factory.annotation.Value;

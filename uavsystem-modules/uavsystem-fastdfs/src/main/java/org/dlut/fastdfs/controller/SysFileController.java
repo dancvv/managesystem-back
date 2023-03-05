@@ -1,4 +1,4 @@
-package org.dlut.file.controller;
+package org.dlut.fastdfs.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.dlut.common.core.domain.R;
 import org.dlut.common.core.utils.file.FileUtils;
-import org.dlut.file.service.ISysFileService;
+import org.dlut.fastdfs.service.ISysFileService;
 import org.dlut.system.api.domain.SysFile;
 
 /**

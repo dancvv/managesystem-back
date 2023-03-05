@@ -1,4 +1,4 @@
-package org.dlut.file;
+package org.dlut.fastdfs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,11 +12,11 @@ import org.dlut.common.swagger.annotation.EnableCustomSwagger2;
  */
 @EnableCustomSwagger2
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
-public class UAVSystemFileApplication
+public class UAVSystemFastDfsApplication
 {
     public static void main(String[] args)
     {
-        SpringApplication.run(UAVSystemFileApplication.class, args);
+        SpringApplication.run(UAVSystemFastDfsApplication.class, args);
         System.out.println("文件服务模块启动成功");
     }
 }

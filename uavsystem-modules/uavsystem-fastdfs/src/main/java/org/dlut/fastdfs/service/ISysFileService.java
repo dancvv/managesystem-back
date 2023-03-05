@@ -1,4 +1,4 @@
-package org.dlut.file.service;
+package org.dlut.fastdfs.service;
 
 import org.springframework.web.multipart.MultipartFile;
 

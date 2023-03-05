@@ -1,10 +1,9 @@
-package org.dlut.file.service;
+package org.dlut.fastdfs.service;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.dlut.file.utils.FileUploadUtils;
+import org.dlut.fastdfs.utils.FileUploadUtils;
 
 /**
  * 本地文件存储

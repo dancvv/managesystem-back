@@ -1,6 +1,5 @@
-package org.dlut.file.service;
+package org.dlut.fastdfs.service;
 
-import com.github.tobato.fastdfs.domain.fdfs.FileInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
