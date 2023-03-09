@@ -50,8 +50,8 @@ public class DroneFlylog extends BaseEntity
     private Integer isArmed;
 
     /** 执行时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "执行时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "执行时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date datetime;
 
     public void setId(String id) 
