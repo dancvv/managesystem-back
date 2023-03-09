@@ -220,7 +220,6 @@
     <modules>
         <module>uavsystem-auth</module>
         <module>uavsystem-gateway</module>
-        <module>uavsystem-visual</module>
         <module>uavsystem-modules</module>
         <module>uavsystem-api</module>
         <module>uavsystem-common</module>
