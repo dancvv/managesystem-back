@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.dlut.managedrone.mapper.DroneInfoMapper">
-    
+
     <resultMap type="DroneInfo" id="DroneInfoResult">
         <result property="id"    column="id"    />
         <result property="droneNumer"    column="drone_numer"    />
@@ -17,15 +17,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="droneBattery"    column="drone_battery"    />
         <result property="droneEndurance"    column="drone_endurance"    />
         <result property="droneManuf"    column="drone_manuf"    />
+        <result property="droneSensors"    column="drone_sensors"    />
     </resultMap>
 
     <sql id="selectDroneInfoVo">
-        select id, drone_numer, drone_type, drone_wheelbase, takeoff_weight, mission_weight, fly_speed, fly_height, drone_status, drone_battery, drone_endurance, drone_manuf from drone_info
+        select id, drone_numer, drone_type, drone_wheelbase, takeoff_weight, mission_weight, fly_speed, fly_height, drone_status, drone_battery, drone_endurance, drone_manuf, drone_sensors from drone_info
     </sql>
 
     <select id="selectDroneInfoList" parameterType="DroneInfo" resultMap="DroneInfoResult">
         <include refid="selectDroneInfoVo"/>
-        <where>  
+        <where>
             <if test="droneNumer != null  and droneNumer != ''"> and drone_numer = #{droneNumer}</if>
             <if test="droneType != null  and droneType != ''"> and drone_type = #{droneType}</if>
             <if test="droneWheelbase != null  and droneWheelbase != ''"> and drone_wheelbase = #{droneWheelbase}</if>
@@ -37,14 +38,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="droneBattery != null "> and drone_battery = #{droneBattery}</if>
             <if test="droneEndurance != null "> and drone_endurance = #{droneEndurance}</if>
             <if test="droneManuf != null  and droneManuf != ''"> and drone_manuf = #{droneManuf}</if>
+            <if test="droneSensors != null  and droneSensors != ''"> and drone_sensors = #{droneSensors}</if>
         </where>
     </select>
-    
+
     <select id="selectDroneInfoById" parameterType="String" resultMap="DroneInfoResult">
         <include refid="selectDroneInfoVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertDroneInfo" parameterType="DroneInfo">
         insert into drone_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -60,7 +62,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="droneBattery != null">drone_battery,</if>
             <if test="droneEndurance != null">drone_endurance,</if>
             <if test="droneManuf != null">drone_manuf,</if>
-         </trim>
+            <if test="droneSensors != null">drone_sensors,</if>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
             <if test="droneNumer != null and droneNumer != ''">#{droneNumer},</if>
@@ -74,7 +77,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="droneBattery != null">#{droneBattery},</if>
             <if test="droneEndurance != null">#{droneEndurance},</if>
             <if test="droneManuf != null">#{droneManuf},</if>
-         </trim>
+            <if test="droneSensors != null">#{droneSensors},</if>
+        </trim>
     </insert>
 
     <update id="updateDroneInfo" parameterType="DroneInfo">
@@ -91,6 +95,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="droneBattery != null">drone_battery = #{droneBattery},</if>
             <if test="droneEndurance != null">drone_endurance = #{droneEndurance},</if>
             <if test="droneManuf != null">drone_manuf = #{droneManuf},</if>
+            <if test="droneSensors != null">drone_sensors = #{droneSensors},</if>
         </trim>
         where id = #{id}
     </update>
@@ -100,7 +105,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteDroneInfoByIds" parameterType="String">
-        delete from drone_info where id in 
+        delete from drone_info where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

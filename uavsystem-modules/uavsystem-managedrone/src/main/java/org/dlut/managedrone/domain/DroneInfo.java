@@ -9,7 +9,7 @@ import org.dlut.common.core.web.domain.BaseEntity;
  * 无人机管理对象 drone_info
  *
  * @author wang
- * @date 2023-02-19
+ * @date 2023-03-30
  */
 public class DroneInfo extends BaseEntity
 {
@@ -32,19 +32,19 @@ public class DroneInfo extends BaseEntity
 
     /** 最大起飞重量 */
     @Excel(name = "最大起飞重量")
-    private Double takeoffWeight;
+    private Long takeoffWeight;
 
     /** 最大任务载荷 */
     @Excel(name = "最大任务载荷")
-    private Double missionWeight;
+    private Long missionWeight;
 
     /** 最大飞行速度m/s */
     @Excel(name = "最大飞行速度m/s")
-    private Double flySpeed;
+    private Long flySpeed;
 
     /** 最大飞行高度m */
     @Excel(name = "最大飞行高度m")
-    private Double flyHeight;
+    private Long flyHeight;
 
     /** 是否损坏 */
     @Excel(name = "是否损坏")
@@ -52,15 +52,19 @@ public class DroneInfo extends BaseEntity
 
     /** 电池mah */
     @Excel(name = "电池mah")
-    private Double droneBattery;
+    private Long droneBattery;
 
     /** 续航时间min */
     @Excel(name = "续航时间min")
-    private Double droneEndurance;
+    private Long droneEndurance;
 
     /** 制造商 */
     @Excel(name = "制造商")
     private String droneManuf;
+
+    /** 传感器 */
+    @Excel(name = "传感器")
+    private String droneSensors;
 
     public void setId(String id)
     {
@@ -98,39 +102,39 @@ public class DroneInfo extends BaseEntity
     {
         return droneWheelbase;
     }
-    public void setTakeoffWeight(Double takeoffWeight)
+    public void setTakeoffWeight(Long takeoffWeight)
     {
         this.takeoffWeight = takeoffWeight;
     }
 
-    public Double getTakeoffWeight()
+    public Long getTakeoffWeight()
     {
         return takeoffWeight;
     }
-    public void setMissionWeight(Double missionWeight)
+    public void setMissionWeight(Long missionWeight)
     {
         this.missionWeight = missionWeight;
     }
 
-    public Double getMissionWeight()
+    public Long getMissionWeight()
     {
         return missionWeight;
     }
-    public void setFlySpeed(Double flySpeed)
+    public void setFlySpeed(Long flySpeed)
     {
         this.flySpeed = flySpeed;
     }
 
-    public Double getFlySpeed()
+    public Long getFlySpeed()
     {
         return flySpeed;
     }
-    public void setFlyHeight(Double flyHeight)
+    public void setFlyHeight(Long flyHeight)
     {
         this.flyHeight = flyHeight;
     }
 
-    public Double getFlyHeight()
+    public Long getFlyHeight()
     {
         return flyHeight;
     }
@@ -143,21 +147,21 @@ public class DroneInfo extends BaseEntity
     {
         return droneStatus;
     }
-    public void setDroneBattery(Double droneBattery)
+    public void setDroneBattery(Long droneBattery)
     {
         this.droneBattery = droneBattery;
     }
 
-    public Double getDroneBattery()
+    public Long getDroneBattery()
     {
         return droneBattery;
     }
-    public void setDroneEndurance(Double droneEndurance)
+    public void setDroneEndurance(Long droneEndurance)
     {
         this.droneEndurance = droneEndurance;
     }
 
-    public Double getDroneEndurance()
+    public Long getDroneEndurance()
     {
         return droneEndurance;
     }
@@ -169,6 +173,15 @@ public class DroneInfo extends BaseEntity
     public String getDroneManuf()
     {
         return droneManuf;
+    }
+    public void setDroneSensors(String droneSensors)
+    {
+        this.droneSensors = droneSensors;
+    }
+
+    public String getDroneSensors()
+    {
+        return droneSensors;
     }
 
     @Override
@@ -186,6 +199,7 @@ public class DroneInfo extends BaseEntity
                 .append("droneBattery", getDroneBattery())
                 .append("droneEndurance", getDroneEndurance())
                 .append("droneManuf", getDroneManuf())
+                .append("droneSensors", getDroneSensors())
                 .toString();
     }
 }
