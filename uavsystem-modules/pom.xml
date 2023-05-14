@@ -19,6 +19,12 @@
 
     <artifactId>uavsystem-modules</artifactId>
     <packaging>pom</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
 
     <description>
         uavsystem-modules业务模块
