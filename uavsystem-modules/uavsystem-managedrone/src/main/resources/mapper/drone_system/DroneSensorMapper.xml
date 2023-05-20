@@ -8,6 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="sensorId"    column="sensor_id"    />
         <result property="sensorType"    column="sensor_type"    />
         <result property="sensorParam"    column="sensor_param"    />
+        <result property="matchUAV"    column="match_uav"    />
     </resultMap>
 
     <sql id="selectDroneSensorVo">

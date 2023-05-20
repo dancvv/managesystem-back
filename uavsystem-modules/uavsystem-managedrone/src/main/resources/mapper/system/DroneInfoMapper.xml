@@ -18,10 +18,11 @@
         <result property="droneEndurance"    column="drone_endurance"    />
         <result property="droneManuf"    column="drone_manuf"    />
         <result property="droneSensors"    column="drone_sensors"    />
+        <result property="isEnabled"    column="is_enabled"    />
     </resultMap>
 
     <sql id="selectDroneInfoVo">
-        select id, drone_numer, drone_type, drone_wheelbase, takeoff_weight, mission_weight, fly_speed, fly_height, drone_status, drone_battery, drone_endurance, drone_manuf, drone_sensors from drone_info
+        select id, drone_numer, drone_type, drone_wheelbase, takeoff_weight, mission_weight, fly_speed, fly_height, drone_status, drone_battery, drone_endurance, drone_manuf, drone_sensors, is_enabled from drone_info
     </sql>
 
     <select id="selectDroneInfoList" parameterType="DroneInfo" resultMap="DroneInfoResult">

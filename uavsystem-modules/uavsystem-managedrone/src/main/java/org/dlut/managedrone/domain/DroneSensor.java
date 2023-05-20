@@ -26,7 +26,10 @@ public class DroneSensor extends BaseEntity
     @Excel(name = "传感器参数")
     private String sensorParam;
 
-    public void setSensorId(Long sensorId) 
+    /** 传感器参数 */
+    @Excel(name = "适配无人机")
+    private String matchUAV;
+    public void setSensorId(Long sensorId)
     {
         this.sensorId = sensorId;
     }
@@ -61,5 +64,13 @@ public class DroneSensor extends BaseEntity
             .append("sensorType", getSensorType())
             .append("sensorParam", getSensorParam())
             .toString();
+    }
+
+    public String getMatchUAV() {
+        return matchUAV;
+    }
+
+    public void setMatchUAV(String matchUAV) {
+        this.matchUAV = matchUAV;
     }
 }
