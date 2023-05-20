@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.dlut.managedrone.mapper.DroneFlylogMapper">
-    
+
     <resultMap type="DroneFlylog" id="DroneFlylogResult">
         <result property="id"    column="id"    />
         <result property="droneNumber"    column="drone_number"    />
@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectDroneFlylogList" parameterType="DroneFlylog" resultMap="DroneFlylogResult">
         <include refid="selectDroneFlylogVo"/>
-        <where>  
+        <where>
             <if test="droneNumber != null  and droneNumber != ''"> and drone_number = #{droneNumber}</if>
             <if test="inAir != null "> and in_air = #{inAir}</if>
             <if test="lat != null "> and lat = #{lat}</if>
@@ -31,14 +31,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="flightMode != null  and flightMode != ''"> and flight_mode = #{flightMode}</if>
             <if test="isArmed != null "> and is_armed = #{isArmed}</if>
             <if test="datetime != null "> and datetime = #{datetime}</if>
+            <if test="id != null">
+                order by datetime
+            </if>
         </where>
+        --         select * from drone_flylog order by datetime
     </select>
-    
+
     <select id="selectDroneFlylogById" parameterType="String" resultMap="DroneFlylogResult">
         <include refid="selectDroneFlylogVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertDroneFlylog" parameterType="DroneFlylog">
         insert into drone_flylog
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -51,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="flightMode != null">flight_mode,</if>
             <if test="isArmed != null">is_armed,</if>
             <if test="datetime != null">datetime,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
             <if test="droneNumber != null and droneNumber != ''">#{droneNumber},</if>
@@ -62,7 +66,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="flightMode != null">#{flightMode},</if>
             <if test="isArmed != null">#{isArmed},</if>
             <if test="datetime != null">#{datetime},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateDroneFlylog" parameterType="DroneFlylog">
@@ -85,7 +89,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteDroneFlylogByIds" parameterType="String">
-        delete from drone_flylog where id in 
+        delete from drone_flylog where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

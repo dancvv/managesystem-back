@@ -10,7 +10,7 @@ import org.dlut.common.core.web.domain.BaseEntity;
 
 /**
  * 飞行日志对象 drone_flylog
- * 
+ *
  * @author wang
  * @date 2023-02-19
  */
@@ -39,7 +39,7 @@ public class DroneFlylog extends BaseEntity
 
     /** 电池容量 */
     @Excel(name = "电池容量")
-    private Long battery;
+    private Double battery;
 
     /** 飞行模式 */
     @Excel(name = "飞行模式")
@@ -54,84 +54,84 @@ public class DroneFlylog extends BaseEntity
     @Excel(name = "执行时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date datetime;
 
-    public void setId(String id) 
+    public void setId(String id)
     {
         this.id = id;
     }
 
-    public String getId() 
+    public String getId()
     {
         return id;
     }
-    public void setDroneNumber(String droneNumber) 
+    public void setDroneNumber(String droneNumber)
     {
         this.droneNumber = droneNumber;
     }
 
-    public String getDroneNumber() 
+    public String getDroneNumber()
     {
         return droneNumber;
     }
-    public void setInAir(Integer inAir) 
+    public void setInAir(Integer inAir)
     {
         this.inAir = inAir;
     }
 
-    public Integer getInAir() 
+    public Integer getInAir()
     {
         return inAir;
     }
-    public void setLat(BigDecimal lat) 
+    public void setLat(BigDecimal lat)
     {
         this.lat = lat;
     }
 
-    public BigDecimal getLat() 
+    public BigDecimal getLat()
     {
         return lat;
     }
-    public void setLng(BigDecimal lng) 
+    public void setLng(BigDecimal lng)
     {
         this.lng = lng;
     }
 
-    public BigDecimal getLng() 
+    public BigDecimal getLng()
     {
         return lng;
     }
-    public void setBattery(Long battery) 
+    public void setBattery(Double battery)
     {
         this.battery = battery;
     }
 
-    public Long getBattery() 
+    public Double getBattery()
     {
         return battery;
     }
-    public void setFlightMode(String flightMode) 
+    public void setFlightMode(String flightMode)
     {
         this.flightMode = flightMode;
     }
 
-    public String getFlightMode() 
+    public String getFlightMode()
     {
         return flightMode;
     }
-    public void setIsArmed(Integer isArmed) 
+    public void setIsArmed(Integer isArmed)
     {
         this.isArmed = isArmed;
     }
 
-    public Integer getIsArmed() 
+    public Integer getIsArmed()
     {
         return isArmed;
     }
-    public void setDatetime(Date datetime) 
+    public void setDatetime(Date datetime)
     {
         this.datetime = datetime;
     }
 
-    public Date getDatetime() 
+    public Date getDatetime()
     {
         return datetime;
     }
@@ -139,15 +139,15 @@ public class DroneFlylog extends BaseEntity
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("droneNumber", getDroneNumber())
-            .append("inAir", getInAir())
-            .append("lat", getLat())
-            .append("lng", getLng())
-            .append("battery", getBattery())
-            .append("flightMode", getFlightMode())
-            .append("isArmed", getIsArmed())
-            .append("datetime", getDatetime())
-            .toString();
+                .append("id", getId())
+                .append("droneNumber", getDroneNumber())
+                .append("inAir", getInAir())
+                .append("lat", getLat())
+                .append("lng", getLng())
+                .append("battery", getBattery())
+                .append("flightMode", getFlightMode())
+                .append("isArmed", getIsArmed())
+                .append("datetime", getDatetime())
+                .toString();
     }
 }

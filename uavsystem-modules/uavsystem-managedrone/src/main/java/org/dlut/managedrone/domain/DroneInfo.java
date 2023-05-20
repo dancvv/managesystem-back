@@ -66,6 +66,9 @@ public class DroneInfo extends BaseEntity
     @Excel(name = "传感器")
     private String droneSensors;
 
+    /** 是否启用 */
+    @Excel(name = "启用状态")
+    private String isEnabled;
     public void setId(String id)
     {
         this.id = id;
@@ -201,5 +204,13 @@ public class DroneInfo extends BaseEntity
                 .append("droneManuf", getDroneManuf())
                 .append("droneSensors", getDroneSensors())
                 .toString();
+    }
+
+    public String getIsEnabled() {
+        return isEnabled;
+    }
+
+    public void setIsEnabled(String isEnabled) {
+        this.isEnabled = isEnabled;
     }
 }
