@@ -9,10 +9,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="sensorType"    column="sensor_type"    />
         <result property="sensorParam"    column="sensor_param"    />
         <result property="matchUAV"    column="match_uav"    />
+        <result property="isEnabled"    column="is_enabled"    />
     </resultMap>
 
     <sql id="selectDroneSensorVo">
-        select sensor_id, sensor_type, sensor_param from drone_sensor
+        select sensor_id, sensor_type, sensor_param, match_uav , is_enabledfrom drone_sensor
     </sql>
 
     <select id="selectDroneSensorList" parameterType="DroneSensor" resultMap="DroneSensorResult">

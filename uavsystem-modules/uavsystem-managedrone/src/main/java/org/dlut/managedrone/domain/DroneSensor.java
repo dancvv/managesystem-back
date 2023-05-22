@@ -29,6 +29,19 @@ public class DroneSensor extends BaseEntity
     /** 传感器参数 */
     @Excel(name = "适配无人机")
     private String matchUAV;
+
+    /** 是否启用 */
+    @Excel(name = "是否启用")
+    private String isEnabled;
+
+    public String getIsEnabled() {
+        return isEnabled;
+    }
+
+    public void setIsEnabled(String isEnabled) {
+        this.isEnabled = isEnabled;
+    }
+
     public void setSensorId(Long sensorId)
     {
         this.sensorId = sensorId;
